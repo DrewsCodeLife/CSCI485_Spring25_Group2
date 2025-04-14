@@ -26,7 +26,9 @@
 - Could abstract the data to build a model of some portion of the city and simulate it!
 
 [LA Traffic counted at intersections](https://data.lacity.org/Transportation/LADOT-Traffic-Counts-Summary/94wu-3ps3/about_data)
+
 [Pedestrian and bike data?](https://data.lacity.org/Transportation/2023-Walk-Bike-Count-Data/6ux4-qj74/about_data)
+
 [More ped and bike data, different area](https://data.lacity.org/Transportation/Arts-District-Pedestrian-and-Bike-Counts-LA-CoMoti/mbz9-j2zk/about_data)
 
 There are also a number of datasets on meter occupancy, though I doubt we want to use that.
