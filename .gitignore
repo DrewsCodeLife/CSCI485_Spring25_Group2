@@ -1,6 +1,7 @@
 # User added
 *.csv
 *.parquet
+*.xlsx
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
