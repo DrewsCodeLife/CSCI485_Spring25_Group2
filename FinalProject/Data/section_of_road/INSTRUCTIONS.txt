@@ -1,0 +1,386 @@
+```
+Authors: Drew
+```
+
+
+The number (e.g. "Mainline VDS '715898'...") is the station ID. This is important for later lookup to show results on a graph and for other lookup purposes.
+
+
+### VARIABLES ###
+
+Flow: Vehicles / 5 minutes
+Occupancy: % Lane full (e.g. bumper-to-bumper is 100)
+Speed: Vehicle Speed in Mph
+Q: Vehicle Miles Traveled / Vehicle Hours Traveled
+
+
+On Ramp sensors only have Flow & Occupancy
+Mainline sensors have all 4 variables.
+#################
+
+
+location Coordinates were gathered using the relevant map from PeMS, finding the same location on google maps (using surrounding streets to specify location), and then fetching the coordinates of the predicted position. "Mainline" or "On Ramp" is from PeMS and refers to the specific road location. I believe Mainline simply refers to the main highway through LA? In particular, we are looking at I5-North (maybe South too?), for only district 7 (which is the LA area)
+
+```
+715898 - 33.880149, -118.021730 - Mainline
+715901 - 33.883681, -118.027733 - On Ramp
+762355 - 33.883681, -118.027733 - Off Ramp - Map location same as 715901
+716899 - 33.883681, -118.027733 - Mainline - Map location same as 715901, perhaps an array of sensors in one station
+716900 - 33.887208, -118.033784 - Mainline
+715903 - 33.887208, -118.033784 - On Ramp - Same location as 716900
+762353 - 33.890681, -118.040822 - Mainline
+775012 - 33.892658, -118.044406 - Mainline
+716904 - 33.894742, -118.048204 - Mainline
+716903 - 33.894742, -118.048204 - Off Ramp - Same location as 716904
+715905 - 33.894742, -118.048204 - On Ramp - Same location as 716904
+718358 - 33.897164, -118.052409 - Mainline
+769625 - 33.900495, -118.058289 - Mainline
+769626 - 33.900495, -118.058289 - Off Ramp - Same location as 769625
+762357 - 33.905090, -118.065005 - Off Ramp
+718081 - 33.905090, -118.065005 - Mainline - Same location as 762357
+718360 - 33.907708, -118.067623 - Mainline
+```
+
+All in all, these stations are spread across about 3 miles (3.01 miles as measured by google maps), as the bird flies, along I5-N
+
+
+
+On PeMS: "Roadway Information (from TSN)" -- probably just repetitive, but tracking it may catch if the road changes in some way:
+
+```{715898}```
+Road Width	36 ft
+Lane Width	12.0 ft
+Inner Shoulder Width	2 ft
+Inner Shoulder Treated Width	2 ft
+Outer Shoulder Width	10 ft
+Outer Shoulder Treated Width	10 ft
+Design Speed Limit	70 mph
+Functional Class	Principal Arterial W/ C/L Prin Arterial
+Inner Median Type	Paved - No Roadway Use
+Inner Median Width	12 ft
+Terrain	Flat
+Population	Urbanized
+Barrier	Metal Beam Barrier w/Glare Screen
+Surface	Concrete
+Roadway Use	No Special Features
+```
+
+```{715901}```
+Road Width	36 ft
+Lane Width	12.0 ft
+Inner Shoulder Width	2 ft
+Inner Shoulder Treated Width	2 ft
+Outer Shoulder Width	10 ft
+Outer Shoulder Treated Width	10 ft
+Design Speed Limit	70 mph
+Functional Class	Principal Arterial W/ C/L Prin Arterial
+Inner Median Type	Paved - No Roadway Use
+Inner Median Width	12 ft
+Terrain	Flat
+Population	Urbanized
+Barrier	Metal Beam Barrier w/Glare Screen
+Surface	Concrete
+Roadway Use	No Special Features
+```
+
+```{762355}```
+Road Width	36 ft
+Lane Width	12.0 ft
+Inner Shoulder Width	2 ft
+Inner Shoulder Treated Width	2 ft
+Outer Shoulder Width	10 ft
+Outer Shoulder Treated Width	10 ft
+Design Speed Limit	70 mph
+Functional Class	Principal Arterial W/ C/L Prin Arterial
+Inner Median Type	Paved - No Roadway Use
+Inner Median Width	12 ft
+Terrain	Flat
+Population	Urbanized
+Barrier	Metal Beam Barrier w/Glare Screen
+Surface	Concrete
+Roadway Use	No Special Features
+```
+
+```{716899}
+Road Width	36 ft
+Lane Width	12.0 ft
+Inner Shoulder Width	2 ft
+Inner Shoulder Treated Width	2 ft
+Outer Shoulder Width	10 ft
+Outer Shoulder Treated Width	10 ft
+Design Speed Limit	70 mph
+Functional Class	Principal Arterial W/ C/L Prin Arterial
+Inner Median Type	Paved - No Roadway Use
+Inner Median Width	12 ft
+Terrain	Flat
+Population	Urbanized
+Barrier	Metal Beam Barrier w/Glare Screen
+Surface	Concrete
+Roadway Use	No Special Features
+```
+
+```{716900}
+Road Width	36 ft
+Lane Width	12.0 ft
+Inner Shoulder Width	2 ft
+Inner Shoulder Treated Width	2 ft
+Outer Shoulder Width	10 ft
+Outer Shoulder Treated Width	10 ft
+Design Speed Limit	70 mph
+Functional Class	Principal Arterial W/ C/L Prin Arterial
+Inner Median Type	Paved - No Roadway Use
+Inner Median Width	12 ft
+Terrain	Flat
+Population	Urbanized
+Barrier	Metal Beam Barrier w/Glare Screen
+Surface	Concrete
+Roadway Use	No Special Features
+```
+
+```{715903}
+Road Width	36 ft
+Lane Width	12.0 ft
+Inner Shoulder Width	2 ft
+Inner Shoulder Treated Width	2 ft
+Outer Shoulder Width	10 ft
+Outer Shoulder Treated Width	10 ft
+Design Speed Limit	70 mph
+Functional Class	Principal Arterial W/ C/L Prin Arterial
+Inner Median Type	Paved - No Roadway Use
+Inner Median Width	12 ft
+Terrain	Flat
+Population	Urbanized
+Barrier	Metal Beam Barrier w/Glare Screen
+Surface	Concrete
+Roadway Use	No Special Features
+```
+
+```{762353}
+Road Width	36 ft
+Lane Width	12.0 ft
+Inner Shoulder Width	2 ft
+Inner Shoulder Treated Width	2 ft
+Outer Shoulder Width	10 ft
+Outer Shoulder Treated Width	10 ft
+Design Speed Limit	70 mph
+Functional Class	Principal Arterial W/ C/L Prin Arterial
+Inner Median Type	Paved - No Roadway Use
+Inner Median Width	12 ft
+Terrain	Flat
+Population	Urbanized
+Barrier	Metal Beam Barrier w/Glare Screen
+Surface	Concrete
+Roadway Use	No Special Features
+```
+
+```{775012}
+Road Width	36 ft
+Lane Width	12.0 ft
+Inner Shoulder Width	2 ft
+Inner Shoulder Treated Width	2 ft
+Outer Shoulder Width	10 ft
+Outer Shoulder Treated Width	10 ft
+Design Speed Limit	70 mph
+Functional Class	Principal Arterial W/ C/L Prin Arterial
+Inner Median Type	Paved - No Roadway Use
+Inner Median Width	12 ft
+Terrain	Flat
+Population	Urbanized
+Barrier	Metal Beam Barrier w/Glare Screen
+Surface	Concrete
+Roadway Use	No Special Features
+```
+
+```{716904}
+Road Width	36 ft
+Lane Width	12.0 ft
+Inner Shoulder Width	2 ft
+Inner Shoulder Treated Width	2 ft
+Outer Shoulder Width	10 ft
+Outer Shoulder Treated Width	10 ft
+Design Speed Limit	70 mph
+Functional Class	Principal Arterial W/ C/L Prin Arterial
+Inner Median Type	Paved - No Roadway Use
+Inner Median Width	12 ft
+Terrain	Flat
+Population	Urbanized
+Barrier	Metal Beam Barrier w/Glare Screen
+Surface	Concrete
+Roadway Use	No Special Features
+```
+
+```{716903}
+Road Width	36 ft
+Lane Width	12.0 ft
+Inner Shoulder Width	2 ft
+Inner Shoulder Treated Width	2 ft
+Outer Shoulder Width	10 ft
+Outer Shoulder Treated Width	10 ft
+Design Speed Limit	70 mph
+Functional Class	Principal Arterial W/ C/L Prin Arterial
+Inner Median Type	Paved - No Roadway Use
+Inner Median Width	12 ft
+Terrain	Flat
+Population	Urbanized
+Barrier	Metal Beam Barrier w/Glare Screen
+Surface	Concrete
+Roadway Use	No Special Features
+```
+
+```{715905}
+Road Width	36 ft
+Lane Width	12.0 ft
+Inner Shoulder Width	2 ft
+Inner Shoulder Treated Width	2 ft
+Outer Shoulder Width	10 ft
+Outer Shoulder Treated Width	10 ft
+Design Speed Limit	70 mph
+Functional Class	Principal Arterial W/ C/L Prin Arterial
+Inner Median Type	Paved - No Roadway Use
+Inner Median Width	12 ft
+Terrain	Flat
+Population	Urbanized
+Barrier	Metal Beam Barrier w/Glare Screen
+Surface	Concrete
+Roadway Use	No Special Features
+```
+
+```{718358}
+Road Width	36 ft
+Lane Width	12.0 ft
+Inner Shoulder Width	2 ft
+Inner Shoulder Treated Width	2 ft
+Outer Shoulder Width	10 ft
+Outer Shoulder Treated Width	10 ft
+Design Speed Limit	70 mph
+Functional Class	Principal Arterial W/ C/L Prin Arterial
+Inner Median Type	Paved - No Roadway Use
+Inner Median Width	12 ft
+Terrain	Flat
+Population	Urbanized
+Barrier	Metal Beam Barrier w/Glare Screen
+Surface	Concrete
+Roadway Use	No Special Features
+```
+
+```{769625}
+Road Width	36 ft
+Lane Width	12.0 ft
+Inner Shoulder Width	2 ft
+Inner Shoulder Treated Width	2 ft
+Outer Shoulder Width	10 ft
+Outer Shoulder Treated Width	10 ft
+Design Speed Limit	70 mph
+Functional Class	Principal Arterial W/ C/L Prin Arterial
+Inner Median Type	Paved - No Roadway Use
+Inner Median Width	12 ft
+Terrain	Flat
+Population	Urbanized
+Barrier	Metal Beam Barrier w/Glare Screen
+Surface	Concrete
+Roadway Use	No Special Features
+```
+
+```{769626}
+Road Width	36 ft
+Lane Width	12.0 ft
+Inner Shoulder Width	2 ft
+Inner Shoulder Treated Width	2 ft
+Outer Shoulder Width	10 ft
+Outer Shoulder Treated Width	10 ft
+Design Speed Limit	70 mph
+Functional Class	Principal Arterial W/ C/L Prin Arterial
+Inner Median Type	Paved - No Roadway Use
+Inner Median Width	12 ft
+Terrain	Flat
+Population	Urbanized
+Barrier	Metal Beam Barrier w/Glare Screen
+Surface	Concrete
+Roadway Use	No Special Features
+```
+
+```{762357}
+Road Width	38 ft
+Lane Width	12.7 ft
+Inner Shoulder Width	5 ft
+Inner Shoulder Treated Width	5 ft
+Outer Shoulder Width	10 ft
+Outer Shoulder Treated Width	10 ft
+Design Speed Limit	70 mph
+Functional Class	Principal Arterial W/ C/L Prin Arterial
+Inner Median Type	Unpaved
+Inner Median Width	50 ft
+Terrain	Flat
+Population	Urbanized
+Barrier	Guardrail in Median left Roadway
+Surface	Concrete
+Roadway Use	No Special Features
+```
+
+```{718081}
+Road Width	38 ft
+Lane Width	12.7 ft
+Inner Shoulder Width	5 ft
+Inner Shoulder Treated Width	5 ft
+Outer Shoulder Width	10 ft
+Outer Shoulder Treated Width	10 ft
+Design Speed Limit	70 mph
+Functional Class	Principal Arterial W/ C/L Prin Arterial
+Inner Median Type	Unpaved
+Inner Median Width	50 ft
+Terrain	Flat
+Population	Urbanized
+Barrier	Guardrail in Median left Roadway
+Surface	Concrete
+Roadway Use	No Special Features
+```
+
+```{718360}
+Road Width	38 ft
+Lane Width	12.7 ft
+Inner Shoulder Width	2 ft
+Inner Shoulder Treated Width	2 ft
+Outer Shoulder Width	10 ft
+Outer Shoulder Treated Width	10 ft
+Design Speed Limit	70 mph
+Functional Class	Principal Arterial W/ C/L Prin Arterial
+Inner Median Type	Paved - No Roadway Use
+Inner Median Width	12 ft
+Terrain	Flat
+Population	Urbanized
+Barrier	Metal Beam Barrier w/Glare Screen
+Surface	Concrete
+Roadway Use	No Special Features
+```
+
+```{}
+
+```
+
+```{}
+
+```
+
+```{}
+
+```
+
+```{}
+
+```
+
+```{}
+
+```
+
+```{}
+
+```
+
+```{}
+
+```
+
+```{}
+
+```
